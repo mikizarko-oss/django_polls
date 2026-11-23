@@ -1,0 +1,67 @@
+
+{% extends 'polls/base.html' %}
+
+{% block title %}
+    Nova anketa | Pollify
+{% endblock %}
+
+{% block content %}
+
+    <div class="page-header">
+        <a href="{% url 'home' %}" class="btn btn-secondary">
+            ← Nazad
+        </a>
+    </div>
+
+    <section class="card form-card">
+
+        <div class="page-header">
+            <h1>Kreiraj novu anketu</h1>
+            <p>Postavi pitanje i ponudi odgovore za glasanje.</p>
+        </div>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="message error">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            {% for field in form %}
+
+                <div class="form-group">
+
+                    <label for="{{ field.id_for_label }}">
+                        {{ field.label }}
+                    </label>
+
+                    {{ field }}
+
+                    {% if field.errors %}
+                        <div class="errorlist">
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
+
+                    {% if field.name == 'closes_at' %}
+                        <small style="color: var(--muted);">
+                            Izaberite datum i vreme zatvaranja ankete.
+                        </small>
+                    {% endif %}
+
+                </div>
+
+            {% endfor %}
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+                Kreiraj anketu
+            </button>
+
+        </form>
+
+    </section>
+
+{% endblock %}

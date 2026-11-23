@@ -1,0 +1,114 @@
+
+{% extends 'polls/base.html' %}
+
+{% block title %}
+    Početna | Pollify
+{% endblock %}
+
+{% block content %}
+
+    <section class="page-header">
+
+        <h1>Dobrodošli u Pollify.</h1>
+
+        <p>
+            Kreirajte ankete, glasajte i pogledajte šta drugi misle.
+        </p>
+
+    </section>
+
+
+    <section class="page-header">
+
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px; flex-wrap: wrap;">
+
+            <div>
+                <h2>Aktuelne ankete</h2>
+                <p>Izaberite anketu i učestvujte u glasanju.</p>
+            </div>
+
+            {% if user.is_authenticated %}
+                <a href="{% url 'create_poll' %}" class="btn btn-primary">
+                    + Kreiraj anketu
+                </a>
+            {% endif %}
+
+        </div>
+
+    </section>
+
+
+    {% if polls %}
+
+        <div class="poll-grid">
+
+            {% for poll in polls %}
+
+                <article class="card poll-card">
+
+                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+
+                        {% if poll.is_open %}
+                            <span class="badge badge-open">
+                                Otvorena
+                            </span>
+                        {% else %}
+                            <span class="badge badge-closed">
+                                Zatvorena
+                            </span>
+                        {% endif %}
+
+                        <span style="font-size: 12px; color: var(--muted);">
+                            #{{ poll.id }}
+                        </span>
+
+                    </div>
+
+
+                    <h3>{{ poll.question }}</h3>
+
+
+                    <div class="poll-meta">
+
+                        <p>Autor: {{ poll.author.username }}</p>
+
+                        <p>
+                            {{ poll.created_at|date:"d.m.Y. H:i" }}
+                        </p>
+
+                        <p>
+                            {{ poll.total_votes }} glasova
+                        </p>
+
+                    </div>
+
+
+                    <a href="{% url 'poll_detail' poll.id %}" class="btn btn-primary">
+                        Pogledaj anketu
+                    </a>
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="card empty-state">
+
+            <h3>Još nema anketa</h3>
+
+            <p>Budite prvi koji će kreirati novu anketu.</p>
+
+            {% if user.is_authenticated %}
+                <a href="{% url 'create_poll' %}" class="btn btn-primary">
+                    Kreiraj anketu
+                </a>
+            {% endif %}
+
+        </div>
+
+    {% endif %}
+
+{% endblock %}

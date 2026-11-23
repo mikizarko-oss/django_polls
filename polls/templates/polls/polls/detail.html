@@ -1,0 +1,85 @@
+
+{% extends 'polls/base.html' %}
+
+{% block title %}
+    {{ poll.question }} | Pollify
+{% endblock %}
+
+{% block content %}
+
+    <div class="page-header">
+        <a href="{% url 'home' %}" class="btn btn-secondary">
+            ← Nazad na ankete
+        </a>
+    </div>
+
+    <section class="card form-card">
+
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 20px;">
+
+            <span class="badge badge-open">
+                Otvorena anketa
+            </span>
+
+            <span style="font-size: 13px; color: var(--muted);">
+                #{{ poll.id }}
+            </span>
+
+        </div>
+
+        <h1 style="font-size: 27px; margin-bottom: 12px;">
+            {{ poll.question }}
+        </h1>
+
+        <div class="poll-meta">
+
+            <p>Autor: {{ poll.author.username }}</p>
+
+            <p>
+                Zatvara se:
+                {{ poll.closes_at|date:"d.m.Y. H:i" }}
+            </p>
+
+            <p>
+                Broj poseta: {{ visit_count }}
+            </p>
+
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid var(--border); margin: 25px 0;">
+
+        <h3 style="margin-bottom: 20px;">
+            Izaberite svoj odgovor
+        </h3>
+
+        <form method="POST" action="{% url 'cast_vote' poll.id %}">
+
+            {% csrf_token %}
+
+            {% for choice in form.choice %}
+
+                <label class="vote-option">
+
+                    {{ choice.tag }}
+
+                    <span>{{ choice.choice_label }}</span>
+
+                </label>
+
+            {% endfor %}
+
+            {% if form.choice.errors %}
+                <div class="errorlist">
+                    {{ form.choice.errors }}
+                </div>
+            {% endif %}
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 15px;">
+                Glasaj
+            </button>
+
+        </form>
+
+    </section>
+
+{% endblock %}

@@ -1,0 +1,410 @@
+
+/* =========================
+   GLOBAL
+========================= */
+
+:root {
+    --primary: #635bdb;
+    --primary-dark: #5148c7;
+    --background: #f5f6fb;
+    --surface: #ffffff;
+    --text: #20243a;
+    --muted: #858ba3;
+    --border: #e8eaf2;
+    --success: #16a36a;
+    --danger: #e05260;
+    --shadow: 0 8px 30px rgba(31, 38, 75, 0.06);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Inter, Arial, sans-serif;
+    background: var(--background);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+.container {
+    width: min(1100px, 92%);
+    margin: 0 auto;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    background: #20213a;
+    color: white;
+    padding: 17px 0;
+}
+
+.navbar-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.logo span {
+    color: #9189ff;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: #d8d9e7;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+.nav-user {
+    color: #aaaed0;
+    font-size: 13px;
+}
+
+.nav-button {
+    background: var(--primary);
+    color: white !important;
+    padding: 9px 17px;
+    border-radius: 8px;
+}
+
+.nav-button:hover {
+    background: var(--primary-dark);
+}
+
+/* =========================
+   MAIN CONTENT
+========================= */
+
+main {
+    padding: 45px 0 70px;
+}
+
+.page-header {
+    margin-bottom: 30px;
+}
+
+.page-header h1 {
+    font-size: 32px;
+    letter-spacing: -1px;
+    margin-bottom: 7px;
+}
+
+.page-header p {
+    color: var(--muted);
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: var(--shadow);
+}
+
+.poll-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.poll-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.poll-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(31, 38, 75, 0.1);
+}
+
+.poll-card h3 {
+    font-size: 19px;
+    margin: 15px 0 10px;
+}
+
+.poll-meta {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 18px;
+}
+
+/* =========================
+   BADGES
+========================= */
+
+.badge {
+    display: inline-block;
+    padding: 5px 11px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.badge-open {
+    color: #16845a;
+    background: #e5f7ef;
+}
+
+.badge-closed {
+    color: #bd4652;
+    background: #ffeaec;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn {
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    padding: 11px 20px;
+    border-radius: 9px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background: #eeeff8;
+    color: var(--text);
+}
+
+.btn-secondary:hover {
+    background: #e1e2f1;
+}
+
+/* =========================
+   FORMS
+========================= */
+
+.form-card {
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.form-control,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="datetime-local"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: white;
+    outline: none;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+.form-control:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(99, 91, 219, 0.12);
+}
+
+input[type="radio"] {
+    accent-color: var(--primary);
+}
+
+.errorlist {
+    color: var(--danger);
+    font-size: 13px;
+    list-style: none;
+    margin-top: 5px;
+}
+
+/* =========================
+   VOTING
+========================= */
+
+.vote-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.vote-option:hover {
+    border-color: var(--primary);
+    background: #f8f7ff;
+}
+
+/* =========================
+   RESULTS
+========================= */
+
+.result-item {
+    margin-bottom: 24px;
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 9px;
+    font-size: 14px;
+}
+
+.result-header strong {
+    font-weight: 700;
+}
+
+.progress {
+    height: 11px;
+    background: #ececf5;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #635bdb, #928bff);
+    border-radius: 20px;
+    transition: width 0.6s ease;
+}
+
+/* =========================
+   MESSAGES
+========================= */
+
+.messages {
+    margin-bottom: 25px;
+}
+
+.message {
+    padding: 13px 17px;
+    border-radius: 9px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.message.success {
+    background: #e5f7ef;
+    color: #16845a;
+}
+
+.message.error {
+    background: #ffeaec;
+    color: #bd4652;
+}
+
+.message.warning {
+    background: #fff4df;
+    color: #986b12;
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-state {
+    text-align: center;
+    padding: 55px 20px;
+    color: var(--muted);
+}
+
+.empty-state h3 {
+    color: var(--text);
+    margin-bottom: 8px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+
+    .navbar-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        gap: 13px;
+    }
+
+    .poll-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-header h1 {
+        font-size: 26px;
+    }
+
+    main {
+        padding-top: 30px;
+    }
+
+    .card {
+        padding: 19px;
+    }
+}

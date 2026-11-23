@@ -1,0 +1,58 @@
+
+{% extends 'polls/base.html' %}
+
+{% block title %}
+    Prijava | Pollify
+{% endblock %}
+
+{% block content %}
+
+    <section class="card form-card">
+
+        <div class="page-header">
+            <h1>Dobro došli nazad</h1>
+            <p>Prijavite se na svoj Pollify nalog.</p>
+        </div>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {% if form.errors %}
+                <div class="message error">
+                    Korisničko ime ili lozinka nisu ispravni.
+                </div>
+            {% endif %}
+
+            <div class="form-group">
+                <label for="{{ form.username.id_for_label }}">
+                    Korisničko ime
+                </label>
+
+                {{ form.username }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.password.id_for_label }}">
+                    Lozinka
+                </label>
+
+                {{ form.password }}
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+                Prijavi se
+            </button>
+
+        </form>
+
+        <p style="text-align: center; margin-top: 22px; color: var(--muted); font-size: 14px;">
+            Nemate nalog?
+            <a href="{% url 'register' %}" style="color: var(--primary); font-weight: 700;">
+                Registrujte se
+            </a>
+        </p>
+
+    </section>
+
+{% endblock %}

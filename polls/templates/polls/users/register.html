@@ -1,0 +1,68 @@
+
+{% extends 'polls/base.html' %}
+
+{% block title %}
+    Registracija | Pollify
+{% endblock %}
+
+{% block content %}
+
+    <section class="card form-card">
+
+        <div class="page-header">
+            <h1>Kreirajte nalog</h1>
+            <p>Registrujte se i počnite da kreirate svoje ankete.</p>
+        </div>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="message error">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            {% for field in form %}
+
+                <div class="form-group">
+
+                    <label for="{{ field.id_for_label }}">
+                        {{ field.label }}
+                    </label>
+
+                    {{ field }}
+
+                    {% if field.help_text %}
+                        <div style="color: var(--muted); font-size: 12px; margin-top: 5px;">
+                            {{ field.help_text }}
+                        </div>
+                    {% endif %}
+
+                    {% if field.errors %}
+                        <div class="errorlist">
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
+
+                </div>
+
+            {% endfor %}
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+                Registruj se
+            </button>
+
+        </form>
+
+        <p style="text-align: center; margin-top: 22px; color: var(--muted); font-size: 14px;">
+            Već imate nalog?
+            <a href="{% url 'login' %}" style="color: var(--primary); font-weight: 700;">
+                Prijavite se
+            </a>
+        </p>
+
+    </section>
+
+{% endblock %}

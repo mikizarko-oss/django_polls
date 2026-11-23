@@ -1,0 +1,89 @@
+
+{% extends 'polls/base.html' %}
+
+{% block title %}
+    Rezultati | Pollify
+{% endblock %}
+
+{% block content %}
+
+    <div class="page-header">
+        <a href="{% url 'home' %}" class="btn btn-secondary">
+            ← Nazad na ankete
+        </a>
+    </div>
+
+    <section class="card form-card">
+
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 20px;">
+
+            <span class="badge badge-closed">
+                Rezultati ankete
+            </span>
+
+            <span style="font-size: 13px; color: var(--muted);">
+                #{{ poll.id }}
+            </span>
+
+        </div>
+
+        <h1 style="font-size: 27px; margin-bottom: 10px;">
+            {{ poll.question }}
+        </h1>
+
+        <div class="poll-meta">
+            <p>Ukupno glasova: {{ poll.total_votes }}</p>
+            <p>Broj poseta: {{ visit_count }}</p>
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid var(--border); margin: 25px 0;">
+
+        <h3 style="margin-bottom: 25px;">
+            Rezultati glasanja
+        </h3>
+
+        {% for result in results %}
+
+            <div class="result-item">
+
+                <div class="result-header">
+
+                    <strong>{{ result.text }}</strong>
+
+                    <span>
+                        {{ result.votes }} glasova · {{ result.percent }}%
+                    </span>
+
+                </div>
+
+                <div class="progress">
+
+                    <div
+                        class="progress-bar"
+                        style="width: {{ result.percent }}%;"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        {% empty %}
+
+            <div class="empty-state">
+                <h3>Nema rezultata</h3>
+                <p>Još uvek niko nije glasao u ovoj anketi.</p>
+            </div>
+
+        {% endfor %}
+
+        <div style="margin-top: 30px;">
+
+            <a href="{% url 'home' %}" class="btn btn-primary">
+                Nazad na početnu
+            </a>
+
+        </div>
+
+    </section>
+
+{% endblock %}
